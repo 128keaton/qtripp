@@ -42,6 +42,7 @@
     F1: GV350MB
     F5: GL300M
     802003: GV58CEU
+    CC: GL520M
 
 # messages
 #
@@ -1219,7 +1220,7 @@
 #
 
 - subtypes: [ GTLOC ] 
-  versions: [ "C30203", "F50701"]
+  versions: [ "C30203", "F50701", "CC0101"]
   imei: 2
   name: 3
   rid: 4
@@ -1267,7 +1268,33 @@
   batt: 19
   sent: 20
   count: 21
-  
+
+#
+# shared gl520m
+#
+
+- subtypes: [ GTFRI, GTGEO, GTSPD, GTSOS, GTRTL, GTPNL, GTMNR, GTDOG, GTDIS, GTIGL ]
+  versions: [ "CC0101"]
+  imei: 2
+  name: 3
+  rid: 4
+  rty: 5
+  number: 6
+  acc: 7
+  vel: 8
+  cog: 9
+  alt: 10
+  lon: 11
+  lat: 12
+  utc: 13
+  mcc: 14
+  mnc: 15
+  lac: 16
+  cid: 17
+  batt: 20
+  sent: 25
+  count: 26
+
 - subtypes: [ GTEPN, GTEPF ]
   versions: [ "2C0600", "300800", "301500", "C30203", "F50701" ]
   imei: 2
