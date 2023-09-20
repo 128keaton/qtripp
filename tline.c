@@ -978,8 +978,8 @@ char *handle_report(struct udata *ud, char *line, char **response)
 		// TODO mnc etc. might be interesting though
 		if ((s = GET_S(pos + dp->utc)) == NULL) {
 			/* no fix */
-            xlog(ud, "s is null");
-			continue;
+            xlog(ud, "s is null\n");
+		//	continue;
 		}
 
 		// printf("    pos=%5d UTC =[%s]\n", pos + dp->utc, s);
