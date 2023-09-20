@@ -675,11 +675,14 @@ char *handle_report(struct udata *ud, char *line, char **response)
         xlog(ud, "GTDIS: using din string %s\n", dinstring);
     	if (dinstring != NULL) {
     		unsigned long din = strtoul(dinstring, NULL, 16);
-            char *digitalInput = "din";
+            char digitalInputStr[4] = "din";
+            char digitalInput[1] = "";
 
-            strcat(digitalInput, &dinstring[0]);
+            digitalInput[0] = dinstring[0];
 
-    		json_append_member(jmerge, digitalInput,	json_mkbool(din & 0x02));
+            strcat(digitalInputStr, digitalInput);
+
+    		json_append_member(jmerge, digitalInputStr,	json_mkbool(din & 0x02));
     		//json_append_member(jmerge, "din2",	json_mkbool(din & 0x02));
     	}
     }
@@ -985,13 +988,16 @@ char *handle_report(struct udata *ud, char *line, char **response)
 		lat = GET_D(pos + dp->lat);
 		lon = GET_D(pos + dp->lon);
 
-		if (isnan(lat) || isnan(lon)) {
-			continue;
-		}
-
 		obj = json_mkobject();
-		json_append_member(obj, "lat", json_mkdouble(lat, 6));
-		json_append_member(obj, "lon", json_mkdouble(lon, 6));
+
+        if (!isnan(lat)) {
+            json_append_member(obj, "lat", json_mkdouble(lat, 6));
+        }
+
+        if (!isnan(lon)) {
+            json_append_member(obj, "lon", json_mkdouble(lon, 6));
+        }
+
 
 		vel = GET_D(pos + dp->vel);
 		if (!isnan(vel)) {
