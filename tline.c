@@ -522,7 +522,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 	}
 
 
-	/* 
+	/*
 	 * lookup device definition
 	 */
 	//fprintf(stderr, "lookup_devices %s %s\n", subtype, protov ? protov : "NULL");
@@ -668,6 +668,22 @@ char *handle_report(struct udata *ud, char *line, char **response)
 		}
 	}
 
+
+	/* "din" is digital input as 2 characters hex */
+    if (!strcmp(subtype, "GTDIS") && !strcmp(protov, "C2010B") ) {
+    	char *dinstring = GET_S(dp->rit);
+        xlog(ud, "GTDIS: using din string %s\n", dinstring);
+    	if (dinstring != NULL) {
+    		unsigned long din = strtoul(dinstring, NULL, 16);
+            char *digitalInput = "din";
+
+            strcat(digitalInput, &dinstring[0]);
+
+    		json_append_member(jmerge, digitalInput,	json_mkbool(din & 0x02));
+    		//json_append_member(jmerge, "din2",	json_mkbool(din & 0x02));
+    	}
+    }
+
 	/* "uart" indicates the possible optional components for analog sensor data */
 	double uart = GET_D(((nreports - 1) * 12) + dp->uart);
 	//fprintf(stderr, "uart double %g\n", uart);
@@ -705,7 +721,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 						 * 2-complement shifted 4 (divided by 16)
 						 */
 						if (!strcmp(adty, "1")) {
-							long temp = strtol(adda, NULL, 16);	
+							long temp = strtol(adda, NULL, 16);
 							if (temp > 32535) {
 								temp -= 65536;
 							}
@@ -882,7 +898,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 			DLOG(1, "DEBUG sent %d [%d]\n",
 					dp->sent,
 					dp->sent
-					+ ((nreports - 1) * 12) 
+					+ ((nreports - 1) * 12)
 					+ (iospresent ? 0 : -1)
 					+ (ac100present ? 0 : -1)
 					+ (ac100present ? ((ac100number - 1) * 3) : 0)
@@ -890,7 +906,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 					+ (xyzpresent ? ((xyznumber - 1) * 2) : 0)
 					);
 			char *sent = GET_S(dp->sent
-					+ ((nreports - 1) * 12) 
+					+ ((nreports - 1) * 12)
 					+ (iospresent ? 0 : -1)
 					+ (ac100present ? 0 : -1)
 					+ (ac100present ? ((ac100number - 1) * 3) : 0)
@@ -900,7 +916,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 		        DLOG(1, "DEBUG sent %d [%d] %s\n",
 					dp->sent,
 					dp->sent
-					+ ((nreports - 1) * 12) 
+					+ ((nreports - 1) * 12)
 					+ (iospresent ? 0 : -1)
 					+ (ac100present ? 0 : -1)
 					+ (ac100present ? ((ac100number - 1) * 3) : 0)
@@ -921,8 +937,8 @@ char *handle_report(struct udata *ud, char *line, char **response)
 
 		/* "count" is counter for sent messages */
 		if (dp->count > 0) {
-			char *count = GET_S(dp->count 
-					+ ((nreports - 1) * 12) 
+			char *count = GET_S(dp->count
+					+ ((nreports - 1) * 12)
 					+ (iospresent ? 0 : -1)
 					+ (ac100present ? 0 : -1)
 					+ (ac100present ? ((ac100number - 1) * 3) : 0)

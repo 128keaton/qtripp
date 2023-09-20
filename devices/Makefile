@@ -1,6 +1,11 @@
 CFLAGS += -I.. -Wall -Werror
 PYTHON=python
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	PYTHON=python3
+endif
+
 # Are we running next to a virtualenv called `venv/`?
 # If so, use that Python binary
 ifeq ($(shell test -e venv/bin/python && echo -n yes),yes)
