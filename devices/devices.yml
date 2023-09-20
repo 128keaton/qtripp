@@ -1401,6 +1401,25 @@
   sent: 17
   count: 18
 
+- subtypes: [ GTSTC ]
+  versions: [ "C2010B" ]
+  imei: 2
+  name: 3
+  acc: 4
+  vel: 5
+  cog: 6
+  alt: 7
+  lon: 8
+  lat: 9
+  utc: 10
+  mcc: 11
+  mnc: 12
+  lac: 13
+  cid: 14
+  reserved: 15
+  sent: 16
+  count: 17
+
 - subtypes: [ GTSTT ]
   versions: [ "2C0600", "300800", "301500", "C30203", "F50701" ]
   imei: 2
