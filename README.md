@@ -66,6 +66,49 @@ The _Queclink Track (air) Interface Protocol Processor_ is a TCP GPRS server for
 1. clone [beanstalk-client](https://github.com/deepfryed/beanstalk-client/) into _qtripp_'s directory, `cd` into that and `make`. (Apply [this fix](https://github.com/deepfryed/beanstalk-client/issues/32) on macOS.)
 2. in _qtripp_'s `Makefile`, define `BEANSTALK`
 
+
+## notes
+### linux compilation
+
+Install mosquitto and libmosquitto-dev:
+```shell
+$ apt-get install mosquitto libmosquitto-dev
+```
+
+Fetch, compile, and install TinyCDB:
+```shell
+$ curl -O https://www.corpit.ru/mjt/tinycdb/tinycdb-0.80.tar.gz
+$ tar -xvf tinycdb-0.80.tar.gz && cd tinycdb-0.80
+$ make && sudo make install
+```
+
+Install Python requirements
+```shell
+$ pip install -r devices/requirements.txt
+```
+
+
+### macOS compilation
+
+Install Mosquitto through Homebrew:
+```shell
+$ brew install mosquitto
+```
+
+Fetch, compile, and install TinyCDB:
+```shell
+$ curl -O https://www.corpit.ru/mjt/tinycdb/tinycdb-0.80.tar.gz
+$ tar -xvf tinycdb-0.80.tar.gz && cd tinycdb-0.80
+$ make && sudo make install
+```
+
+Install Python requirements
+```shell
+$ pip3 install -r devices/requirements.txt
+```
+
+
+
 ## credits
 
 * [uthash](https://troydhanson.github.io/uthash/), by Troy D. Hanson
