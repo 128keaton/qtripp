@@ -978,6 +978,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 		// TODO mnc etc. might be interesting though
 		if ((s = GET_S(pos + dp->utc)) == NULL) {
 			/* no fix */
+            xlog(ud, "s is null");
 			continue;
 		}
 
@@ -1212,6 +1213,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 				json_append_member(obj, jm->key, json_mkbool(jm->bool_));
 		}
 
+        xlog(ud, "Transmitting JSON");
 		transmit_json(ud, imei, obj, true);
 
 

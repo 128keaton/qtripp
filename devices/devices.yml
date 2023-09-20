@@ -1125,6 +1125,25 @@
   sent: 17
   count: 18
 
+- subtypes: [ GTMPN, GTMPF, GTBTC, GTSTC ]
+  versions: [ "C2010B" ]
+  imei: 2
+  name: 3
+  acc: 4
+  vel: 5
+  cog: 6
+  alt: 7
+  lon: 8
+  lat: 9
+  utc: 10
+  mcc: 11
+  mnc: 12
+  lac: 13
+  cid: 14
+  reserved: 15
+  sent: 16
+  count: 17
+
 - subtypes: [ GTBPL ]
   versions: [ "450202", "310603", "380603", "310701", "380701", "310905", "380905", "311004", "381004", "310C00", "380C00", "380D01", "420201", "420401", "F1030B", "F10401", "F1040A", "8020030100", "8020030303" ]
   imei: 2
