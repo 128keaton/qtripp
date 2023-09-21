@@ -1418,8 +1418,7 @@
   versions: [ "C2010B", "C2010D" ]
   imei: 2
   name: 3
-  rid: 5
-  rty: 5
+  rit: 5
   number: 6
   acc: 7
   vel: 8
