@@ -957,9 +957,8 @@ char *handle_report(struct udata *ud, char *line, char **response)
 
 		//fprintf(stderr, "DEBUG nofix (%d)\n", pos + dp->utc);
 		// TODO mnc etc. might be interesting though
-		if ((s = GET_S(pos + dp->utc)) == NULL) {
+		if ((s = GET_S(pos + dp->utc)) == NULL && strcmp(ud->cf->allow_empty_date, "true") != 0) {
 			/* no fix */
-            xlog(ud, "s is null\n");
 			continue;
 		}
 

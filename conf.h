@@ -67,6 +67,7 @@ typedef struct config {
 	const char *dumpdir;
 	const char *datadir;
 	const char *rawtopic;
+    const char *allow_empty_date;
 #ifdef STATSD
 	statsd_link *sd;
 	const char *statsdhost;
