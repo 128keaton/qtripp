@@ -992,12 +992,12 @@ char *handle_report(struct udata *ud, char *line, char **response)
 
 		obj = json_mkobject();
 
-        if (!isnan(lat)) {
+        if (!isnan(lat) && !isnan(lon)) {
             json_append_member(obj, "lat", json_mkdouble(lat, 6));
-        }
-
-        if (!isnan(lon)) {
             json_append_member(obj, "lon", json_mkdouble(lon, 6));
+            json_append_member(obj, "_type", json_mkstring("location"));
+        } else {
+            json_append_member(obj, "_type", json_mkstring("status"));
         }
 
 
@@ -1040,7 +1040,6 @@ char *handle_report(struct udata *ud, char *line, char **response)
 			json_append_member(obj, "cid", json_mkstring(s));
 		}
 
-		json_append_member(obj, "_type", json_mkstring("location"));
 
 		if ((s = GET_S(pos + dp->acc)) != NULL) {
 
