@@ -68,6 +68,7 @@ typedef struct config {
 	const char *datadir;
 	const char *rawtopic;
     bool transmit_model;
+    bool transmit_report_subtype;
 #ifdef STATSD
 	statsd_link *sd;
 	const char *statsdhost;

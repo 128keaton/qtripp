@@ -40,6 +40,7 @@ int ini_handler(void *cf, const char *section, const char *key, const char *val)
 		if (_eq("datadir"))     c->datadir = strdup(val);
 		if (_eq("cdb_path"))    c->cdb_path = strdup(val);
         if (_eq("transmit_model"))     c->transmit_model = (strcmp(strdup(val), "true") == 0);
+        if (_eq("transmit_report_subtype"))     c->transmit_report_subtype = (strcmp(strdup(val), "true") == 0);
 #ifdef STATSD
 		if (_eq("statsdhost"))  c->statsdhost = strdup(val);
 #endif

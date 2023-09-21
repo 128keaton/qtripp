@@ -513,6 +513,10 @@ char *handle_report(struct udata *ud, char *line, char **response)
                     json_append_member(obj, "model", json_mkstring("unknown"));
                 }
 
+                if (strcmp(subtype, "<nil>") != 0 && ud->cf->transmit_report_subtype == true) {
+                    json_append_member(obj, "subtype", json_mkstring(subtype));
+                }
+
                 if (!isnan(last_lat) && !isnan(last_lon)) {
                     json_append_member(obj, "lat", json_mkdouble(last_lat, 6));
                     json_append_member(obj, "lon", json_mkdouble(last_lon, 6));
@@ -1015,7 +1019,11 @@ char *handle_report(struct udata *ud, char *line, char **response)
             json_append_member(obj, "model", json_mkstring("unknown"));
         }
 
-		vel = GET_D(pos + dp->vel);
+        if (strcmp(subtype, "<nil>") != 0 && ud->cf->transmit_report_subtype == true) {
+            json_append_member(obj, "subtype", json_mkstring(subtype));
+        }
+
+        vel = GET_D(pos + dp->vel);
 		if (!isnan(vel)) {
 			json_append_member(obj, "vel", json_mkdouble(vel, 1));
 		}
