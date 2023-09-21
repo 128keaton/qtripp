@@ -505,14 +505,21 @@ char *handle_report(struct udata *ud, char *line, char **response)
 
 			if (imei_last_position(imei, &last_lat, &last_lon, &last_tst, &last_vel, &last_cog, false) == true) {
 				JsonNode *obj = json_mkobject();
-				json_append_member(obj, "_type", json_mkstring("location"));
 
 
-                if (!isnan(last_lat))
+                if (model) {
+                    json_append_member(obj, "model", json_mkstring(model->desc));
+                } else {
+                    json_append_member(obj, "model", json_mkstring("unknown"));
+                }
+
+                if (!isnan(last_lat) && !isnan(last_lon)) {
                     json_append_member(obj, "lat", json_mkdouble(last_lat, 6));
-
-                if (!isnan(last_lon))
                     json_append_member(obj, "lon", json_mkdouble(last_lon, 6));
+                    json_append_member(obj, "_type", json_mkstring("location"));
+                } else {
+                    json_append_member(obj, "_type", json_mkstring("status"));
+                }
 
                 if (!isnan(last_vel))
                     json_append_member(obj, "vel", json_mkdouble(last_vel, 1));
