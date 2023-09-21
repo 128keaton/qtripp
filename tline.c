@@ -1210,7 +1210,15 @@ char *handle_report(struct udata *ud, char *line, char **response)
 				json_append_member(obj, jm->key, json_mkbool(jm->bool_));
 		}
 
-		transmit_json(ud, imei, obj, true);
+        int keyCount = 0;
+
+        json_foreach(jm, obj) {
+            keyCount += 1;
+        }
+
+        if (keyCount >= 3)
+            transmit_json(ud, imei, obj, true);
+
 
 
 #ifdef WITH_BEAN
