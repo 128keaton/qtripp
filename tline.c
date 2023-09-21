@@ -992,6 +992,11 @@ char *handle_report(struct udata *ud, char *line, char **response)
             json_append_member(obj, "_type", json_mkstring("status"));
         }
 
+        if (model) {
+            json_append_member(obj, "model", json_mkstring(model->desc));
+        } else {
+            json_append_member(obj, "model", json_mkstring("unknown"));
+        }
 
 		vel = GET_D(pos + dp->vel);
 		if (!isnan(vel)) {
