@@ -975,6 +975,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 		// TODO mnc etc. might be interesting though
 		if ((s = GET_S(pos + dp->utc)) == NULL && strcmp(ud->cf->allow_empty_date, "true") != 0) {
 			/* no fix */
+            xlog(ud, "Unable to parse UTC string. Set 'allow_empty_date' in your config to allow this report to be processed regardless of this\n");
 			continue;
 		}
 
