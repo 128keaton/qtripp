@@ -506,9 +506,17 @@ char *handle_report(struct udata *ud, char *line, char **response)
 			if (imei_last_position(imei, &last_lat, &last_lon, &last_tst, &last_vel, &last_cog, false) == true) {
 				JsonNode *obj = json_mkobject();
 				json_append_member(obj, "_type", json_mkstring("location"));
-				json_append_member(obj, "lat", json_mkdouble(last_lat, 6));
-				json_append_member(obj, "lon", json_mkdouble(last_lon, 6));
-				json_append_member(obj, "vel", json_mkdouble(last_vel, 1));
+
+
+                if (!isnan(last_lat))
+                    json_append_member(obj, "lat", json_mkdouble(last_lat, 6));
+
+                if (!isnan(last_lon))
+                    json_append_member(obj, "lon", json_mkdouble(last_lon, 6));
+
+                if (!isnan(last_vel))
+                    json_append_member(obj, "vel", json_mkdouble(last_vel, 1));
+
 				json_append_member(obj, "cog", json_mknumber(last_cog));
 				json_append_member(obj, "tst", json_mknumber(last_tst));
 				json_append_member(obj, "sent", json_mknumber(time(0)));
