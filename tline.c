@@ -507,9 +507,9 @@ char *handle_report(struct udata *ud, char *line, char **response)
 				JsonNode *obj = json_mkobject();
 
 
-                if (model) {
+                if (model && ud->cf->transmit_model == true) {
                     json_append_member(obj, "model", json_mkstring(model->desc));
-                } else {
+                } else if (ud->cf->transmit_model == true) {
                     json_append_member(obj, "model", json_mkstring("unknown"));
                 }
 
@@ -1009,9 +1009,9 @@ char *handle_report(struct udata *ud, char *line, char **response)
             json_append_member(obj, "_type", json_mkstring("status"));
         }
 
-        if (model) {
+        if (model && ud->cf->transmit_model == true) {
             json_append_member(obj, "model", json_mkstring(model->desc));
-        } else {
+        } else if (ud->cf->transmit_model == true) {
             json_append_member(obj, "model", json_mkstring("unknown"));
         }
 

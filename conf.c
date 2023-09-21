@@ -39,7 +39,7 @@ int ini_handler(void *cf, const char *section, const char *key, const char *val)
 		if (_eq("dumpdir"))     c->dumpdir = strdup(val);
 		if (_eq("datadir"))     c->datadir = strdup(val);
 		if (_eq("cdb_path"))    c->cdb_path = strdup(val);
-        if (_eq("allow_empty_date"))     c->allow_empty_date = strdup(val);
+        if (_eq("transmit_model"))     c->transmit_model = (strcmp(strdup(val), "true") == 0);
 #ifdef STATSD
 		if (_eq("statsdhost"))  c->statsdhost = strdup(val);
 #endif
