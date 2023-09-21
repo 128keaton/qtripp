@@ -786,30 +786,6 @@
   sent: 20
   count: 21
 
-# gl620mg
-- subtypes: [ GTDIS ]
-  versions: [ "C2010B", "C2010D" ]
-  imei: 2
-  name: 3
-  reserved: 4
-  rit: 5
-  din: 5
-  number: 6
-  acc: 7
-  vel: 8
-  cog: 9
-  alt: 10
-  lon: 11
-  lat: 12
-  utc: 13
-  mcc: 14
-  mnc: 15
-  lac: 16
-  cid: 17
-  reserved: 18
-  odometer: 19
-  sent: 28
-  count: 29
 
 # gl620mg
 - subtypes: [ GTINF ]
