@@ -811,6 +811,22 @@
   sent: 28
   count: 29
 
+# gl620mg
+- subtypes: [ GTINF ]
+  versions: [ "C2010B" ]
+  imei: 2
+  name: 3
+  mst: 4
+  uext: 9
+  ubatt: 11
+  reserved: 14
+  utc: 16
+  ios: 17
+  din: 20
+  dout: 21
+  sent: 24
+  count: 25
+
 - subtypes: [ GTFLA ]
   versions: [ "310603", "380603", "310701", "380701", "310905", "380905", "311004", "381004", "310C00", "380C00", "380D01" ]
   imei: 2

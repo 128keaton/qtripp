@@ -960,7 +960,7 @@ char *handle_report(struct udata *ud, char *line, char **response)
 		if ((s = GET_S(pos + dp->utc)) == NULL) {
 			/* no fix */
             xlog(ud, "s is null\n");
-		//	continue;
+			continue;
 		}
 
 		// printf("    pos=%5d UTC =[%s]\n", pos + dp->utc, s);
@@ -1194,7 +1194,6 @@ char *handle_report(struct udata *ud, char *line, char **response)
 				json_append_member(obj, jm->key, json_mkbool(jm->bool_));
 		}
 
-        xlog(ud, "Transmitting JSON");
 		transmit_json(ud, imei, obj, true);
 
 
