@@ -668,21 +668,25 @@ char *handle_report(struct udata *ud, char *line, char **response)
 		}
 	}
 
-
-	/* "din" is digital input as 2 characters hex */
-    if (!strcmp(subtype, "GTDIS") && !strcmp(protov, "C2010B") ) {
-    	char *dinstring = GET_S(dp->rit);
-        xlog(ud, "GTDIS: using din string %s\n", dinstring);
-    	if (dinstring != NULL) {
-    		unsigned long din = strtoul(dinstring, NULL, 16);
-            char *digitalInput = "din";
-
-            strcat(digitalInput, &dinstring[0]);
-
-    		json_append_member(jmerge, digitalInput,	json_mkbool(din & 0x02));
-    		//json_append_member(jmerge, "din2",	json_mkbool(din & 0x02));
-    	}
+    if (dp->din > 0) {
+        char *dinstring = GET_S(dp->din);
+        if (dinstring != NULL) {
+            unsigned long din = strtoul(dinstring, NULL, 16);
+            json_append_member(jmerge, "din1",	json_mkbool(din & 0x01));
+            json_append_member(jmerge, "din2",	json_mkbool(din & 0x02));
+        }
     }
+
+    /* "dout" is digital output as 2 characters hex */
+    if (dp->dout > 0) {
+        char *doutstring = GET_S(dp->dout);
+        if (doutstring != NULL) {
+            unsigned long dout = strtoul(doutstring, NULL, 16);
+            json_append_member(jmerge, "dout1",	json_mkbool(dout & 0x01));
+            json_append_member(jmerge, "dout2",	json_mkbool(dout & 0x02));
+        }
+    }
+
 
 	/* "uart" indicates the possible optional components for analog sensor data */
 	double uart = GET_D(((nreports - 1) * 12) + dp->uart);
