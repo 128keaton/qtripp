@@ -216,7 +216,9 @@ void xlog(struct udata *ud, char *fmt, ...)
 	FILE *fp;
 	off_t pos;
 
-	fp = (ud == NULL) ? stderr : ud->logfp;
+
+	fp = stdout;
+
 
 	fprintf(fp, "%s %lld pid=%d ", tstamp(now), (long long)now, getpid());
 	va_start(ap, fmt);
