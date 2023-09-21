@@ -975,22 +975,14 @@ char *handle_report(struct udata *ud, char *line, char **response)
 
 		int pos = (rep * 12); /* 12 elements in green area */
 
-		//fprintf(stderr, "DEBUG nofix (%d)\n", pos + dp->utc);
-		// TODO mnc etc. might be interesting though
-		if ((s = GET_S(pos + dp->utc)) == NULL && strcmp(ud->cf->allow_empty_date, "true") != 0) {
-			/* no fix */
-            xlog(ud, "Unable to parse UTC string. Set 'allow_empty_date' in your config to allow this report to be processed regardless of this\n");
-			continue;
-		}
-
 		// printf("    pos=%5d UTC =[%s]\n", pos + dp->utc, s);
 		// s = GET_S(pos + dp->lat);
 		// printf("    pos=%5d LAT =[%s]\n", pos + dp->lat, s);
 
-		lat = GET_D(pos + dp->lat);
-		lon = GET_D(pos + dp->lon);
+        lat = GET_D(pos + dp->lat);
+        lon = GET_D(pos + dp->lon);
 
-		obj = json_mkobject();
+        obj = json_mkobject();
 
         if (!isnan(lat) && !isnan(lon)) {
             json_append_member(obj, "lat", json_mkdouble(lat, 6));
