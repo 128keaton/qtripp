@@ -17,28 +17,19 @@ STATSD = yes
 
 #
 CC=gcc -g
-
-CFLAGS += -DMAXSPLITPARTS=500 -Idevices/ -I.
-
-ifeq ($(UNAME_S),Darwin)
-	CFLAGS += -I/opt/homebrew/include -I/usr/local/include
-else
-	CFLAGS += -I/usr/local/include
-endif
-
-CFLAGS += -Wall -Werror
-
+CFLAGS += -DMAXSPLITPARTS=500 -Idevices/ -I. -I/usr/local/include -Wall -Werror
 ifdef LOGFILE_SIZE
 CFLAGS += -DLOGFILE_SIZE=$(LOGFILE_SIZE)
 endif
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS += -I/opt/homebrew/include
+endif
 
-LDFLAGS=-L /usr/local/lib
-
+LDFLAGS=-L /usr/local/lib -lmosquitto -lm -lcdb
 ifeq ($(UNAME_S),Darwin)
 	LDFLAGS+= -L /opt/homebrew/lib
 endif
 
-LDFLAGS+= -lmosquitto -lm -lcdb
 
 OBJS=	util.o \
 	json.o \
