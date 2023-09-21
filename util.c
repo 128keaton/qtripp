@@ -217,10 +217,15 @@ void xlog(struct udata *ud, char *fmt, ...)
 	off_t pos;
 
 
-	fp = stdout;
+    fp = (ud == NULL) ? stderr : ud->logfp;
+
+    if (fp == NULL) {
+        fp = stdout;
+    } else {
+        fprintf(fp, "%s %lld pid=%d ", tstamp(now), (long long)now, getpid());
+    }
 
 
-	fprintf(fp, "%s %lld pid=%d ", tstamp(now), (long long)now, getpid());
 	va_start(ap, fmt);
 	vfprintf(fp, fmt, ap);
 	fflush(fp);
